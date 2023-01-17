@@ -1,0 +1,38 @@
+@import '../../../style/variables.scss';
+
+.main-page {
+  width: 100%;
+
+  @media #{$mobile} {
+    padding: 30px 20px;
+  }
+
+  @media #{$noMobile} {
+    padding: 50px 20px;
+  }
+
+  &__columns {
+    @media #{$noMobile} {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+    }
+
+    @media #{$tablet} {
+      grid-column-gap: 30px;
+    }
+
+    @media #{$desktop} {
+      grid-column-gap: 50px;
+    }
+  }
+
+  &__column {
+    @media #{$noDesktop} {
+    margin-bottom: 30px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

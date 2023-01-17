@@ -1,0 +1,40 @@
+@import '../../style/variables.scss';
+
+.filters-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, .35) 0 5px 20px;
+
+  &__field {
+    width: 100%;
+    padding: 5px;
+    margin: 0 0 20px;
+    font-size: 14px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__label {
+    margin-bottom: 5px;
+    font-size: 12px;
+  }
+
+  &__btn {
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    color: $white;
+    border-radius: 10px;
+    background-color: $blue-main;
+    cursor: pointer;
+    transition: background-color 200ms linear;
+
+    &:hover {
+      background: $red;
+    }
+  }
+}

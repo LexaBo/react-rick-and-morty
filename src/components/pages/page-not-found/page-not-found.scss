@@ -1,0 +1,15 @@
+@import '../../../style/variables.scss';
+
+.page-not-found {
+  padding: 20px;
+
+  &__title {
+    margin: 0 0 30px;
+    font-size: 32px;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 24px;
+  }
+}

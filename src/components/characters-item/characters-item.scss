@@ -1,0 +1,55 @@
+@import '../../style/variables.scss';
+
+.character-item {
+  &__image-wr {
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+    overflow: hidden;
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 100%;
+    transition: all .3s;
+  }
+
+  &__link {
+    text-decoration: none;
+
+    &:hover {
+      .character-item__image {
+        transform: scale(1.2);
+      }
+
+      .character-item__name {
+          text-decoration: underline;
+      }
+    }
+  }
+
+  &__text-container {
+    padding: 10px;
+  }
+
+  &__name {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    color: $blue-main;
+
+    @media #{$mobile} {
+      font-size: 12px;
+    }
+
+    @media #{$tablet} {
+      font-size: 16px;
+    }
+
+    @media #{$desktop} {
+      font-size: 20px;
+    }
+  }
+}

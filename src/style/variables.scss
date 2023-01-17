@@ -1,0 +1,17 @@
+// Colors
+$black: #000000;
+$white: #FFFFFF;
+$blue-main: #00b6cd;
+$red: #AD310B;
+
+// Media
+$mobile375: "only screen and (max-width: 375px)";
+$mobile: "only screen and (max-width: 767px)";
+$noMobile: "only screen and (min-width: 768px)";
+$tablet: "only screen and (min-width: 768px) and (max-width: 1023px)";
+$desktop: "only screen and (min-width: 1024px)";
+$noDesktop: "only screen and (max-width: 1023px)";
+$mediumDesktop: "only screen and (min-width: 1200px)";
+$noMediumDesktop: "only screen and (max-width: 1199px)";
+$largeDesktop: "only screen and (min-width: 1440px)";
+$noLargeDesktop: "only screen and (max-width: 1439px)";

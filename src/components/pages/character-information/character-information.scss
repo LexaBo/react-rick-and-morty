@@ -1,0 +1,81 @@
+@import '../../../style/variables.scss';
+
+.character-information {
+  max-width: 700px;
+  margin: 0 auto;
+
+  @media #{$mobile} {
+    padding: 30px 20px;
+  }
+
+  @media #{$noMobile} {
+    padding: 50px 20px;
+  }
+
+  &__columns {
+    display: grid;
+
+    @media #{$noMobile} {
+      grid-template-columns: 300px 1fr;
+      grid-column-gap: 40px;
+    }
+  }
+
+  &__image {
+    display: block;
+    max-width: 300px;
+    width: 100%;
+
+    @media #{$mobile} {
+      margin: 0 auto 40px;
+    }
+  }
+
+  &__text-wr {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__item {
+    margin: 0 0 20px;
+  }
+
+  &__text {
+    margin: 0;
+  }
+
+  &__title {
+    margin: 0 10px 0 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 115%;
+
+    @media #{$mobile} {
+      font-size: 18px;
+    }
+
+    @media #{$noMobile} {
+      font-size: 24px;
+    }
+  }
+
+  &__description {
+    margin: 0;
+    line-height: 115%;
+
+    @media #{$mobile} {
+      font-size: 16px;
+    }
+
+    @media #{$noMobile} {
+      font-size: 18px;
+    }
+  }
+}
