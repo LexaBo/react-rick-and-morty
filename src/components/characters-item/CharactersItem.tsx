@@ -2,9 +2,14 @@ import './characters-item.scss';
 
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { CharactersObjInterface } from "../../types/characters"
 
-const HeroesListItem = ({name, img, id}:CharactersObjInterface) => {
+interface itemInfo {
+    name: string,
+    image: string,
+    id: string,
+}
+
+const CharacterListItem = ({name, image, id}: itemInfo) => {
     const link = `character/${id}`;
 
     return (
@@ -15,7 +20,7 @@ const HeroesListItem = ({name, img, id}:CharactersObjInterface) => {
                     <LazyLoadImage
                         alt="character"
                         className="character-item__image"
-                        src={img}
+                        src={image}
                         effect="blur"
                     />
                 </div>
@@ -27,4 +32,4 @@ const HeroesListItem = ({name, img, id}:CharactersObjInterface) => {
     )
 }
 
-export default HeroesListItem;
+export default CharacterListItem;

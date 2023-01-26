@@ -1,10 +1,19 @@
-import {applyMiddleware, createStore, combineReducers } from 'redux';
-import characters from '../reducers/characters';
-import character from '../reducers/character';
-import filters from '../reducers/filters';
-import thunk from "redux-thunk";
+import { configureStore } from '@reduxjs/toolkit';
+import characters from '../components/characters-grid/charactersSlice';
+import character from '../components/pages/character-information/characterSlice';
+import filters from '../components/filters/filtersSlice';
 
+const store = configureStore({
+    reducer: {
+        characters,
+        character,
+        filters
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false
+    }),
+})
 
-export const rootReducer = combineReducers({characters, character, filters})
-export const store = createStore(rootReducer, applyMiddleware(thunk));
-export type RootState = ReturnType<typeof rootReducer>
+export default store;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

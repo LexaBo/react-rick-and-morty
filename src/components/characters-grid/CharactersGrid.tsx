@@ -1,30 +1,32 @@
 import './characters-grid.scss';
 import '../../style/pagination.scss';
 
-import { useEffect } from 'react';
-import { useActions } from "../../hooks/useActions";
+import {useEffect} from 'react';
 import CharactersItem from "../characters-item/CharactersItem";
 import NothingFound from "../nothing-found/NothingFound";
 import Loader from '../loader/Loader';
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import Pagination from "react-js-pagination";
+import {fetchCharacters, setCharactersPageNum} from "./charactersSlice";
+import {ItemCharacters} from "../../type/characters";
+
 
 const CharactersGrid = () => {
-    const elements = useTypedSelector((state) => state.characters.characters)
-    const page = useTypedSelector((state) => state.characters.page)
-    const charactersLoadingStatus = useTypedSelector(state => state.characters.charactersLoadingStatus);
-    const count =  useTypedSelector((state) => state.characters.count);
-    const itemPerPage = useTypedSelector((state) => state.characters.itemPerPage);
-    const nameFilter = useTypedSelector((state) => state.filters.filtersName);
-    const filtersStatus = useTypedSelector((state) => state.filters.filtersStatus);
-    const filtersGender = useTypedSelector((state) => state.filters.filtersGender);
-    const { fetchCharacters, setCharactersPageNum } = useActions();
+    const elements = useAppSelector((state) => state.characters.characters)
+    const page = useAppSelector((state) => state.characters.page)
+    const charactersLoadingStatus = useAppSelector(state => state.characters.charactersLoadingStatus);
+    const count =  useAppSelector((state) => state.characters.count);
+    const itemPerPage = useAppSelector((state) => state.characters.itemPerPage);
+    const nameFilter = useAppSelector((state) => state.filters.filtersName);
+    const filtersStatus = useAppSelector((state) => state.filters.filtersStatus);
+    const filtersGender = useAppSelector((state) => state.filters.filtersGender);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        fetchCharacters(page, nameFilter, filtersStatus, filtersGender);
-    }, [page, nameFilter, filtersStatus, filtersGender]); // eslint-disable-line react-hooks/exhaustive-deps
+        dispatch(fetchCharacters({page, nameFilter, filtersStatus, filtersGender}));
+    }, [page, nameFilter, filtersStatus, filtersGender]);
 
-    const renderCharactersList = (arr: any[]) => {
+    const renderCharactersList = (arr: Array<ItemCharacters>) => {
         if (arr.length === 0) {
             return (
                 <NothingFound />
@@ -34,7 +36,7 @@ const CharactersGrid = () => {
         return arr.map((item) => {
            const arrInfo = {
                name: item.name,
-               img: item.image,
+               image: item.image,
                id: item.id
             }
 
@@ -45,7 +47,7 @@ const CharactersGrid = () => {
     }
 
    const handlePageChange = (pageNumber: number) => {
-       setCharactersPageNum(pageNumber);
+       dispatch(setCharactersPageNum(pageNumber));
     }
 
     if (charactersLoadingStatus === "loading") {

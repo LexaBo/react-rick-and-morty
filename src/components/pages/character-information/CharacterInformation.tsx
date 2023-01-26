@@ -1,32 +1,32 @@
 import './character-information.scss';
 
-import { CharacterInfoType } from "../../../types/character";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { useParams} from 'react-router-dom';
-import { useActions } from "../../../hooks/useActions";
-import { useEffect } from "react";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import {fetchCharacter } from './characterSlice';
+import {Helmet, HelmetProvider } from 'react-helmet-async';
+import {useParams} from 'react-router-dom';
+import {useEffect} from "react";
+import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import Loader from "../../loader/Loader";
-import BackHome from "../../back-home/back-home";
+import BackHome from "../../back-home/BackHome";
 import NothingFound from "../../nothing-found/NothingFound";
+import {InterfaceCharacterInfo} from "../../../type/character";
 
 const CharacterInformation = () => {
-    const { fetchCharacter } = useActions();
-    const { characterId } = useParams();
-    const characterInfo =  useTypedSelector((state) => state.character.characterInfo);
-    const image =  useTypedSelector((state) => state.character.image);
-    const characterLoadingStatus = useTypedSelector(state => state.character.characterLoadingStatus);
+    const {characterId } = useParams<{characterId?: string}>();
+    const characterInfo =  useAppSelector((state) => state.character.characterInfo);
+    const image =  useAppSelector((state) => state.character.image);
+    const characterLoadingStatus = useAppSelector(state => state.character.characterLoadingStatus);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        fetchCharacter(characterId)
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        dispatch(fetchCharacter(characterId));
+    }, []);
 
-    const renderDescription = (info: CharacterInfoType) => {
+    const renderDescription = (info: InterfaceCharacterInfo) => {
       return  Object.keys(info).map((infoTitle: string) => {
          return  (
              <li className="character-information__item" key={infoTitle}>
                  <p className="character-information__text">
-                     <span className="character-information__title">{infoTitle}:</span> <span className="character-information__description">{info[infoTitle as keyof CharacterInfoType]}</span>
+                     <span className="character-information__title">{infoTitle}:</span> <span className="character-information__description">{info[infoTitle as keyof typeof info]}</span>
                  </p>
              </li>
             )
@@ -59,7 +59,7 @@ const CharacterInformation = () => {
                     <div className="character-information__column">
                         <div className="character-information__list-wr">
                             <ul className="character-information__list">
-                                { renderDescription(characterInfo) }
+                                {renderDescription(characterInfo)}
                             </ul>
                         </div>
                     </div>
