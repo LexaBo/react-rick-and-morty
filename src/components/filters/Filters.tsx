@@ -3,7 +3,7 @@ import './filters.scss';
 import {Formik, Field, Form, FormikHelpers} from 'formik';
 import {setFiltersName, setFiltersStatus, setFiltersGender} from "./filtersSlice";
 import {setCharactersPageNum} from "../characters-grid/charactersSlice"
-import {useAppDispatch} from "../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 
 interface Values {
     name: string;
@@ -13,13 +13,16 @@ interface Values {
 
 const Filters = () => {
     const dispatch = useAppDispatch();
+    const nameFilter = useAppSelector((state) => state.filters.filtersName);
+    const filtersStatus = useAppSelector((state) => state.filters.filtersStatus);
+    const filtersGender = useAppSelector((state) => state.filters.filtersGender);
 
     return (
         <Formik
             initialValues={{
-                name: '',
-                status: '',
-                gender: '',
+                name: nameFilter,
+                status: filtersStatus,
+                gender: filtersGender,
             }}
             onSubmit={(
                 values: Values,
