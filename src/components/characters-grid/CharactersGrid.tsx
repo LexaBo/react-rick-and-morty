@@ -13,18 +13,19 @@ import {ItemCharacters} from "../../type/characters";
 
 const CharactersGrid = () => {
     const elements = useAppSelector((state) => state.characters.characters)
-    const page = useAppSelector((state) => state.characters.page)
+    const activePageNumber = useAppSelector((state) => state.characters.activePageNumber)
     const charactersLoadingStatus = useAppSelector(state => state.characters.charactersLoadingStatus);
-    const count =  useAppSelector((state) => state.characters.count);
+    const totalItems =  useAppSelector((state) => state.characters.totalItems);
     const itemPerPage = useAppSelector((state) => state.characters.itemPerPage);
-    const nameFilter = useAppSelector((state) => state.filters.filtersName);
+    const filterName = useAppSelector((state) => state.filters.filtersName);
     const filtersStatus = useAppSelector((state) => state.filters.filtersStatus);
     const filtersGender = useAppSelector((state) => state.filters.filtersGender);
     const dispatch = useAppDispatch();
+    let content;
 
     useEffect(() => {
-        dispatch(fetchCharacters({page, nameFilter, filtersStatus, filtersGender}));
-    }, [page, nameFilter, filtersStatus, filtersGender]);
+        dispatch(fetchCharacters({activePageNumber, filterName, filtersStatus, filtersGender}));
+    }, [activePageNumber, filterName, filtersStatus, filtersGender]);
 
     const renderCharactersList = (arr: Array<ItemCharacters>) => {
         if (arr.length === 0) {
@@ -51,28 +52,33 @@ const CharactersGrid = () => {
     }
 
     if (charactersLoadingStatus === "loading") {
-        return <Loader/>;
+        content = <Loader/>;
     } else if (charactersLoadingStatus === "error") {
-        return (
-            <NothingFound/>
+        content = <NothingFound/>
+    } else {
+        content = (
+            <ul className="characters-list">
+                {renderCharactersList(elements)}
+            </ul>
         )
     }
 
     return (
         <>
-            <ul className="characters-list">
-                {renderCharactersList(elements)}
-            </ul>
-            <Pagination
-                itemClass="page-item"
-                linkClass="page-link"
-                hideNavigation={true}
-                activePage={page}
-                itemsCountPerPage={itemPerPage}
-                totalItemsCount={count}
-                pageRangeDisplayed={5}
-                onChange={handlePageChange}
-            />
+            {content}
+            {charactersLoadingStatus === "error" ?
+               '' :
+                <Pagination
+                    itemClass="page-item"
+                    linkClass="page-link"
+                    hideNavigation={true}
+                    activePage={activePageNumber}
+                    itemsCountPerPage={itemPerPage}
+                    totalItemsCount={totalItems}
+                    pageRangeDisplayed={5}
+                    onChange={handlePageChange}
+                />
+            }
         </>
     )
 }

@@ -1,6 +1,6 @@
 export interface InfoCharacters {
-    page: number,
-    nameFilter: string,
+    activePageNumber: number,
+    filterName: string,
     filtersStatus: string,
     filtersGender: string
 }
@@ -22,7 +22,7 @@ export interface ResponseCharacters {
 export interface StateCharacters {
     characters: Array<ItemCharacters>,
     charactersLoadingStatus: string,
-    page: number,
-    count: number,
+    activePageNumber: number,
+    totalItems: number,
     itemPerPage: number,
 }
