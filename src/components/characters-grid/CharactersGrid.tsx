@@ -1,10 +1,10 @@
-import './characters-grid.scss';
-import '../../style/pagination.scss';
+import "./characters-grid.scss";
+import "../../style/pagination.scss";
 
-import {useEffect} from 'react';
+import {useEffect} from "react";
 import CharactersItem from "../characters-item/CharactersItem";
 import NothingFound from "../nothing-found/NothingFound";
-import Loader from '../loader/Loader';
+import Loader from "../loader/Loader";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import Pagination from "react-js-pagination";
 import {fetchCharacters, setCharactersPageNum} from "./charactersSlice";
@@ -51,9 +51,7 @@ const CharactersGrid = () => {
        dispatch(setCharactersPageNum(pageNumber));
     }
 
-    if (charactersLoadingStatus === "loading") {
-        content = <Loader/>;
-    } else if (charactersLoadingStatus === "error") {
+    if (charactersLoadingStatus === "error") {
         content = <NothingFound/>
     } else {
         content = (
@@ -67,7 +65,7 @@ const CharactersGrid = () => {
         <>
             {content}
             {charactersLoadingStatus === "error" ?
-               '' :
+               "" :
                 <Pagination
                     itemClass="page-item"
                     linkClass="page-link"
@@ -79,6 +77,7 @@ const CharactersGrid = () => {
                     onChange={handlePageChange}
                 />
             }
+            {charactersLoadingStatus === "loading" ? <Loader/> : ""}
         </>
     )
 }

@@ -1,6 +1,6 @@
-import './main-page.scss';
+import "./main-page.scss";
 
-import {Helmet, HelmetProvider} from 'react-helmet-async';
+import {Helmet, HelmetProvider} from "react-helmet-async";
 import React from "react";
 
 import Filters from "../../filters/Filters";

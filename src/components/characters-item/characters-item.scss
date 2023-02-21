@@ -36,19 +36,25 @@
 
   &__name {
     position: relative;
-    display: inline-block;
+    display: -webkit-box;
     margin: 0;
     color: $blue-main;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 
     @media #{$mobile} {
+      min-height: 26px;
       font-size: 12px;
     }
 
     @media #{$tablet} {
+      min-height: 36px;
       font-size: 16px;
     }
 
     @media #{$desktop} {
+      min-height: 48px;
       font-size: 20px;
     }
   }

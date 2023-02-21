@@ -1,8 +1,8 @@
-import './character-information.scss';
+import "./character-information.scss";
 
-import {fetchCharacter } from './characterSlice';
-import {Helmet, HelmetProvider } from 'react-helmet-async';
-import {useParams} from 'react-router-dom';
+import {fetchCharacter } from "./characterSlice";
+import {Helmet, HelmetProvider } from "react-helmet-async";
+import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import Loader from "../../loader/Loader";
@@ -16,6 +16,7 @@ const CharacterInformation = () => {
     const image =  useAppSelector((state) => state.character.image);
     const characterLoadingStatus = useAppSelector(state => state.character.characterLoadingStatus);
     const dispatch = useAppDispatch();
+    let content;
 
     useEffect(() => {
         dispatch(fetchCharacter(characterId));
@@ -34,23 +35,11 @@ const CharacterInformation = () => {
     }
 
     if (characterLoadingStatus === "loading") {
-        return <Loader/>;
+        content = <Loader/>;
     } else if (characterLoadingStatus === "error") {
-        return (
-            <NothingFound />
-        )
-    }
-
-    return (
-        <HelmetProvider>
-            <Helmet>
-                <meta
-                    name="info character"
-                    content="Rick and Morty character information"
-                />
-                <title>character information</title>
-            </Helmet>
-            <BackHome/>
+        content =  <NothingFound />
+    } else {
+        content = (
             <div className="character-information">
                 <div className="character-information__columns">
                     <div className="character-information__column">
@@ -64,7 +53,20 @@ const CharacterInformation = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>)
+    }
+
+    return (
+        <HelmetProvider>
+            <Helmet>
+                <meta
+                    name="info character"
+                    content="Rick and Morty character information"
+                />
+                <title>character information</title>
+            </Helmet>
+            <BackHome/>
+            {content}
         </HelmetProvider>
     );
 }

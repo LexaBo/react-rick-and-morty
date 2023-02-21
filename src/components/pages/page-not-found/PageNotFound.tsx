@@ -1,6 +1,6 @@
-import './page-not-found.scss';
+import "./page-not-found.scss";
 
-import {Helmet, HelmetProvider} from 'react-helmet-async';
+import {Helmet, HelmetProvider} from "react-helmet-async";
 import BackHome from "../../back-home/BackHome";
 
 export default function PageNotFound() {

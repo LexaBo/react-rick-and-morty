@@ -1,15 +1,15 @@
-import './back-home.scss';
+import "./back-home.scss";
 
-import {Link} from 'react-router-dom';
+import {Link} from "react-router-dom";
 import {useEffect} from "react";
-import backIcon from '../../resources/img/common/back-icon.svg';
+import backIcon from "../../resources/img/common/back-icon.svg";
 
 const BackHome = () => {
     useEffect(() => {
-        document.body.classList.add('back-home-on-page')
+        document.body.classList.add("back-home-on-page")
 
         return () => {
-            document.body.classList.remove('back-home-on-page')
+            document.body.classList.remove("back-home-on-page")
         }
     }, []);
 

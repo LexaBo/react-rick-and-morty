@@ -1,5 +1,5 @@
-import './main-banner.scss';
-import banner from '../../resources/img/main-banner/rick-and-morty.png';
+import "./main-banner.scss";
+import banner from "../../resources/img/main-banner/rick-and-morty.png";
 
 const MainBanner = () => {
     return (

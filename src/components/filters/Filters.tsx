@@ -1,6 +1,6 @@
-import './filters.scss';
+import "./filters.scss";
 
-import {Formik, Field, Form, FormikHelpers} from 'formik';
+import {Formik, Field, Form, FormikHelpers} from "formik";
 import {setFiltersName, setFiltersStatus, setFiltersGender} from "./filtersSlice";
 import {setCharactersPageNum} from "../characters-grid/charactersSlice"
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";

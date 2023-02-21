@@ -1,7 +1,7 @@
-import './characters-item.scss';
+import "./characters-item.scss";
 
 import { Link } from "react-router-dom";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface itemInfo {
     name: string,
